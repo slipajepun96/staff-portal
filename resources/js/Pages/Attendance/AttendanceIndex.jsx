@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/Components/ui/ca
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
-export default function AttendanceMenu({ mustVerifyEmail, status }) {
+export default function AttendanceIndex({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
             header={
@@ -38,21 +38,13 @@ export default function AttendanceMenu({ mustVerifyEmail, status }) {
                         </Card>
                     </Link>
 
-                    <Link href={route('attendance.menu')} className="md:hidden">
+                    <Link href={route('attendance.index')} className="md:hidden">
                         <Card className="h-20 hover:shadow-md">
                             <CardHeader>
                                 <CardTitle>Log Kerja Luar</CardTitle>
                                 {/* <CardDescription>Card Description</CardDescription> */}
                             </CardHeader>
-                            {/* <CardContent>Hahaha</CardContent> */}
-                            {/* <CardFooter className="justify-end">
-                                                        <PrimaryButtonWithArrow
-                                                            className="ms-4"
-                                                            // disabled={processing}
-                                                        >
-                                                            Log Masuk
-                                                        </PrimaryButtonWithArrow>
-                                                    </CardFooter> */}
+
                         </Card>
                     </Link>
                 </div>

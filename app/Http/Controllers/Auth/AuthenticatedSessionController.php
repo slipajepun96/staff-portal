@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,9 +31,11 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-        // console.log("store");
 
         $request->session()->regenerate();
+
+        $redirectUrl = redirect()->intended(route('dashboard'))->getTargetUrl();
+        Log::info('Redirecting to:', ['url' => $redirectUrl]);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

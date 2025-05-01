@@ -1,6 +1,6 @@
 {
     "name": "Staff Portal",
-    "short_name": "Portal",
+    "short_name": "Staff Portal",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#162456",

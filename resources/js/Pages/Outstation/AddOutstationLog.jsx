@@ -1,57 +1,21 @@
-// import { Inertia } from '@inertiajs/inertia'; 
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import BackButton from '@/Components/BackButton';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/Components/ui/card';
+import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-// import { MapContainer, TileLayer, Marker, Circle, useMap } from 'react-leaflet';
-// import 'leaflet/dist/leaflet.css';
-// import 'leaflet-defaulticon-compatibility';
-// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import { useForm } from '@inertiajs/react';
-// import { Input } from '@/components/ui/input';
-// import { Label } from '@/components/ui/label';
 
 
-export default function AddLocation({ geofences = [] }) {
-    const [position, setPosition] = useState([2.727893, 103.468221]); // Default to Rompin
-
-    const { data, setData, post, processing, errors, reset } = useForm({
-        location_name: '',
-        location_address: '',
-        location_latitude: position[0],
-        location_longitude: position[1],
-        location_radius: 100,
-    });
-
-    // Synchronize position state with latitude and longitude fields
-    // useEffect(() => {
-    //     setPosition([
-    //         parseFloat(data.location_latitude),
-    //         parseFloat(data.location_longitude),
-    //     ]);
-    // }, [data.location_latitude, data.location_longitude]);
-
-
-    // const handleClick = (e) => {
-    //     const { lat, lng } = e.latlng;
-    //     console.log('Map clicked:', e.latlng);
-    //     // Update the marker position
-    //     setPosition([lat, lng]);
-
-    //     // Update the form state with the new latitude and longitude
-    //     setData('location_latitude', lat);
-    //     setData('location_longitude', lng);
-    // };
-
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+export default function AddOutstationLog({ mustVerifyEmail, status }) {
     const submit = (e) => {
         e.preventDefault();
         console.log('onSuccess', data);
@@ -59,11 +23,30 @@ export default function AddLocation({ geofences = [] }) {
         post(route('admin.location.add'), {
             onSuccess: () => {
                 reset(
-                    'location_name',
-                    'location_address',
-                    'location_latitude',
-                    'location_longitude',
-                    'location_radius',
+                    'outstation_month',
+                    'outstation_year',
+                    'outstation_from_datetime',
+                    'outstation_to_datetime',
+                    'outstation_location',
+                    'outstation_reason',
+                    'outstation_claim_meal_allowance',
+                    'oustation_meal_allowance_num_of_breakfast',
+                    'oustation_meal_allowance_rate_of_breakfast',
+                    'oustation_meal_allowance_num_of_lunch',
+                    'oustation_meal_allowance_rate_of_lunch',
+                    'oustation_meal_allowance_num_of_evening_teabreak',
+                    'oustation_meal_allowance_rate_of_evening_teabreak',
+                    'oustation_meal_allowance_num_of_dinner',
+                    'oustation_meal_allowance_rate_of_dinner',
+                    'outstation_type_of_accommodation_claimed',
+                    'outstation_accommodation_no_receipt_overnight_rate',
+                    'outstation_accommodation_with_receipt_overnight_rate',
+                    'outstation_accommodation_total_payment',
+                    'outstation_accommodation_attachment',
+                    'outstation_owncar_mileage_travelled',
+                    'outstation_owncar_mileage_rate_perkm',
+                    'claimed',
+                    'claim_form_id',
                 );
                 // Close the dialog
                 console.log('onSuccess', data);
@@ -72,33 +55,24 @@ export default function AddLocation({ geofences = [] }) {
             },
         });
     };
-    const handleDialogClose = (isOpen) => {
-        setIsDialogOpen(isOpen);
 
-        if (!isOpen) {
-            reset(
-                'location_name',
-                'location_address',
-                'location_latitude',
-                'location_longitude',
-                'location_radius',
-            );
-        }
-    };
     return (
-        <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
-            <DialogTrigger asChild>
-                <PrimaryButton variant="outline">
-                    Tambah Lokasi & Geofencing
-                </PrimaryButton>
-            </DialogTrigger>
-            <DialogContent className="max-w-xl">
-                <DialogHeader>
-                    <DialogTitle>Tambah Lokasi & Geofencing</DialogTitle>
-                    {/* <DialogDescription>
-                        Anyone who has this link will be able to view this.
-                    </DialogDescription> */}
-                </DialogHeader>
+        <AuthenticatedLayout
+            header={
+                <div className="flex flex-row items-center space-x-2">
+                    <BackButton route={route('dashboard')} />
+                    <h2 className="my-2 text-xl font-semibold leading-tight text-gray-100">
+                        Kerja Luar
+                    </h2>
+                </div>
+            }
+        >
+            <Head title="Kerja Luar" />
+
+            <div className="p-2 px-3 text-white lg:px-8">
+                <p className="text-xl font-bold text-gray-800">
+                    Tambah Log Kerja Luar
+                </p>
                 <form onSubmit={submit}>
                     <div className="items-center space-y-2">
                         <div className="grid flex-1 gap-2">
@@ -266,7 +240,8 @@ export default function AddLocation({ geofences = [] }) {
                         </PrimaryButton>
                     </div>
                 </form>
-            </DialogContent>
-        </Dialog>
+
+            </div>
+        </AuthenticatedLayout>
     );
 }

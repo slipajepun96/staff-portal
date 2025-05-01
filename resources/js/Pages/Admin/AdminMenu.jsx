@@ -48,7 +48,7 @@ export default function AdminMenu({ mustVerifyEmail, status }) {
                         <Link href={route('profile.edit')} className="">
                             <Card className="hover:shadow-md">
                                 <CardHeader>
-                                    <CardTitle>Pengguna</CardTitle>
+                                    <CardTitle>Waktu Masuk / Keluar & Rehat</CardTitle>
                                     {/* <CardDescription>Card Description</CardDescription> */}
                                 </CardHeader>
                             </Card>

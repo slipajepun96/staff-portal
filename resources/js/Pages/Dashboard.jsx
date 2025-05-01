@@ -8,6 +8,7 @@ import {
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import AttendanceCard from '@/Pages/Partials/AttendanceCard';
 // import PrimaryButtonWithArrow from '@/Components/PrimaryButtonWithArrow';
 
 const settings = {
@@ -27,14 +28,14 @@ export default function Dashboard() {
     const userName = auth.user.name; // Get the user's name
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout className="">
             <Head title="Utama" />
 
-            <div className="">
+            <div>
                 <div className="h-40 bg-blue-950 p-2 px-3 text-white lg:px-8">
                     <div className="mx-auto max-w-7xl">
-                        <p className="my-4 text-sm font-semibold md:text-xl">
-                            Selamat Pagi, {userName}!
+                        <p className="my-4 text-md font-bold md:text-xl">
+                            Selamat Pagi!
                         </p>
                         <div className="my-2 grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2">
                             <Card className="hover:shadow-md">
@@ -114,11 +115,12 @@ export default function Dashboard() {
                                 </CardContent>
                             </Card>
                         </div>
-                        <p className="text-sm font-bold uppercase text-gray-800">
+                        <AttendanceCard />
+                        <p className="text-sm font-bold uppercase text-gray-800 mt-3">
                             Urusan Anda
                         </p>
-                        <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                            <Link href={route('profile.edit')} className="">
+                        <div className="mb-[30px] grid w-full grid-cols-2 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                            <Link href={route('outstation.index')} className="">
                                 <Card className="h-20 hover:shadow-md">
                                     <CardHeader>
                                         <CardTitle>Kerja Luar</CardTitle>
@@ -127,7 +129,7 @@ export default function Dashboard() {
                             </Link>
 
                             <Link
-                                href={route('attendance.menu')}
+                                href={route('attendance.index')}
                                 className="md:hidden"
                             >
                                 <Card className="h-20 hover:shadow-md">
@@ -137,7 +139,7 @@ export default function Dashboard() {
                                 </Card>
                             </Link>
 
-                            <Link href={route('profile.edit')} className="">
+                            {/* <Link href={route('profile.edit')} className="">
                                 <Card className="h-20 hover:shadow-md">
                                     <CardHeader>
                                         <CardTitle>Cuti</CardTitle>
@@ -166,7 +168,7 @@ export default function Dashboard() {
                                         </CardDescription>
                                     </CardHeader>
                                 </Card>
-                            </Link>
+                            </Link> */}
                         </div>
                     </div>
                 </div>

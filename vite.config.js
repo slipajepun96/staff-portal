@@ -17,7 +17,7 @@ export default defineConfig({
     //     https: true,
     // },
     server: {
-        host: 'staff-portal.test',
+        // host: 'staff-portal.test',
         https: {
             key: fs.readFileSync(
                 path.resolve(
@@ -31,6 +31,10 @@ export default defineConfig({
                     '.config/valet/Certificates/staff-portal.test.crt',
                 ),
             ),
+        },
+        cors: {
+            origin: '*', // Allow all for local dev
+            methods: ['GET', 'POST'],
         },
         strictPort: false,
         hmr: {

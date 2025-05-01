@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\OutstationController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Administrator\AdminController;
 use App\Http\Controllers\Administrator\UserController;
@@ -48,9 +49,16 @@ Route::middleware('auth')->group(function () {
 
     // location & geofencing
     Route::get('/admin/location', [LocationController::class, 'locationIndex'])->name('admin.location.index');
+    Route::post('/admin/location/add', [LocationController::class, 'addLocation'])->name('admin.location.add');
+    Route::post('/admin/location/remove', [LocationController::class, 'removeLocation'])->name('admin.location.remove');
 
-     // attendance
-     Route::get('/attendance', [AttendanceController::class, 'attendance_menu'])->name('attendance.menu');
+    // attendance
+    Route::get('/attendance', [AttendanceController::class, 'attendanceIndex'])->name('attendance.index');
+    Route::post('/attendance/location-check', [AttendanceController::class, 'attendanceLocation'])->name('attendance.location.check');
+
+    //outstation
+    Route::get('/outstation', [OutstationController::class, 'outstationIndex'])->name('outstation.index');
+    Route::get('/outstation/add', [OutstationController::class, 'addOutstation'])->name('outstation.add');
  
 });
 

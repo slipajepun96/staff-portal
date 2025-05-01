@@ -15,8 +15,9 @@ class EntityController extends Controller
 {
     public function entityIndex(Request $request): Response
     {
-        $entities = Entity::where('is_active','=',1)->get();
 
+        $entities = Entity::where('is_active','=',1)->get();
+// dd($entities);
         return Inertia::render('Admin/Entity/EntityIndex', [
             'entities' => $entities,
         ]);

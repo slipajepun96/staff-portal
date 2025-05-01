@@ -184,7 +184,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </header>
             )}
 
-            <main>{children}</main>
+            <main class="mb-[30px]">{children}</main>
 
             {/* mobile menu bar, bottom */}
 

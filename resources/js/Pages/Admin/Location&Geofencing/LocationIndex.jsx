@@ -4,7 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import AddLocation from './Partials/AddLocation';
-
+import RemoveLocation from './Partials/RemoveLocation';
 
 // import {
 //     ColumnDef,
@@ -23,8 +23,8 @@ import {
 } from '@/components/ui/table';
 import DangerButton from '@/Components/DangerButton';
 
-function refreshEntities() {
-    router.reload({ only: ['entities'] }); // Reload only the `entities` prop
+function refreshLocations() {
+    router.reload({ only: ['geofences'] }); // Reload only the `entities` prop
 }
 
 export default function LocationIndex({ success, geofences }) {
@@ -56,58 +56,51 @@ export default function LocationIndex({ success, geofences }) {
                                     <TableHead className="w-[50px]">
                                         #
                                     </TableHead>
-                                    <TableHead>Nama Entiti</TableHead>
-                                    <TableHead>Jenis Entiti</TableHead>
+                                    <TableHead>Lokasi & Geofencing</TableHead>
                                     <TableHead className="text-right">
                                         Tindakan
                                     </TableHead>
                                 </TableRow>
                             </TableHeader>
-                            {/* <TableBody>
-                                {entities.length === 0 ? (
+                            {console.log(geofences)}
+                            <TableBody>
+                                {geofences.length === 0 ? (
                                     <TableRow>
                                         <TableCell
                                             colSpan={5}
                                             className="text-center"
                                         >
-                                            Tiada Entiti Ditemui
+                                            Tiada Lokasi & Geofencing Ditemui
                                         </TableCell>
                                     </TableRow>
                                 ) : (
-                                    entities.map((entity, index) => (
-                                        <TableRow key={entity.id}>
+                                    geofences.map((location, index) => (
+                                        <TableRow key={location.id}>
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>
                                                 <div className="font-bold">
-                                                    {entity.entity_abbv} -{' '}
-                                                    {entity.entity_name}
+                                                    {location.location_name}
                                                 </div>
-                                                Alamat : {entity.entity_address} <br />
-                                                No. Telefon : {entity.entity_phone} <br />
-                                            </TableCell>
-                                            <TableCell>
-                                                {entity.entity_type}
+                                                {location.location_latitude},
+                                                {location.location_longitude}
+                                                <br />
+                                                Alamat :{' '}
+                                                {location.location_address}
+                                                <br />
                                             </TableCell>
                                             <TableCell className="text-right">
-                                                <EditEntity
-                                                    refreshEntities={
-                                                        refreshEntities
+                                                <RemoveLocation
+                                                    refreshLocations={
+                                                        refreshLocations
                                                     }
-                                                    entity={entity}
-                                                    className="max-w-xl"
-                                                />
-                                                <DeleteEntity
-                                                    refreshEntities={
-                                                        refreshEntities
-                                                    }
-                                                    entityId={entity.id}
+                                                    locationId={location.id}
                                                     className="max-w-xl"
                                                 />
                                             </TableCell>
                                         </TableRow>
                                     ))
                                 )}
-                            </TableBody> */}
+                            </TableBody>
                         </Table>
                     </div>
                 </div>
